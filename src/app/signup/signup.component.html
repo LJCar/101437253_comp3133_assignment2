@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <form [formGroup]="signupForm" (ngSubmit)="signup()" class="p-4 w-25 border rounded shadow-sm bg-light">
+    <h3 class="mb-4 text-center">Create an Account</h3>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="email" class="form-label col-form-label-sm w-50 mx-auto d-block">Email</label>
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        class="form-control form-control-sm w-50 mx-auto d-block"
+        [ngClass]="{'is-invalid': signupForm.get('email')?.invalid && signupForm.get('email')?.touched}"
+      />
+      <div class="invalid-feedback w-50 mx-auto d-block" *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid">
+        <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="signupForm.get('email')?.errors?.['email']">Invalid email format.</small>
+      </div>
+    </div>
+
+    <!-- First Name -->
+    <div class="mb-3">
+      <label for="firstName" class="form-label col-form-label-sm w-50 mx-auto d-block">First Name</label>
+      <input
+        type="text"
+        id="firstName"
+        formControlName="firstName"
+        class="form-control form-control-sm w-50 mx-auto d-block"
+        [ngClass]="{'is-invalid': signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched}"
+      />
+      <div class="invalid-feedback w-50 mx-auto d-block" *ngIf="signupForm.get('firstName')?.touched && signupForm.get('firstName')?.invalid">
+        <small>First name is required.</small>
+      </div>
+    </div>
+
+    <!-- Last Name -->
+    <div class="mb-3">
+      <label for="lastName" class="form-label col-form-label-sm w-50 mx-auto d-block">Last Name</label>
+      <input
+        type="text"
+        id="lastName"
+        formControlName="lastName"
+        class="form-control form-control-sm w-50 mx-auto d-block"
+        [ngClass]="{'is-invalid': signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched}"
+      />
+      <div class="invalid-feedback w-50 mx-auto d-block" *ngIf="signupForm.get('lastName')?.touched && signupForm.get('lastName')?.invalid">
+        <small>Last name is required.</small>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+      <label for="password" class="form-label col-form-label-sm w-50 mx-auto d-block">Password</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        class="form-control form-control-sm w-50 mx-auto d-block"
+        [ngClass]="{'is-invalid': signupForm.get('password')?.invalid && signupForm.get('password')?.touched}"
+      />
+
+      <div class="invalid-feedback w-50 mx-auto d-block">
+        <small *ngIf="signupForm.get('password')?.errors as errors">
+          <ng-container *ngIf="signupForm.get('password')?.touched">
+            <span *ngIf="errors['required']">Password is required.</span>
+            <span *ngIf="!errors['required'] && errors['minlength']">Password must be at least 6 characters.</span>
+            <span *ngIf="!errors['required'] && !errors['minlength'] && errors['pattern']">Password cannot contain spaces.</span>
+          </ng-container>
+        </small>
+      </div>
+    </div>
+
+    <!-- Signup or Login -->
+    <button type="submit" class="btn btn-success w-50 mx-auto d-block">Sign Up</button>
+    <div class="text-center mt-3">
+      <span>Already have an account?</span>
+      <a routerLink="/login" class="ms-1 text-decoration-none">Log in</a>
+    </div>
+  </form>
+</div>
