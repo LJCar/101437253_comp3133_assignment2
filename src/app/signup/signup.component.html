@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
-  <form [formGroup]="signupForm" (ngSubmit)="signup()" class="p-4 w-25 border rounded shadow-sm bg-light">
+  <form [formGroup]="signupForm" (ngSubmit)="signup()" autocomplete="off" class="p-4 w-25 border rounded shadow-sm bg-light">
     <h3 class="mb-4 text-center">Create an Account</h3>
 
     <!-- Email -->
@@ -72,6 +72,9 @@
 
     <!-- Signup or Login -->
     <button type="submit" class="btn btn-success w-50 mx-auto d-block">Sign Up</button>
+    <div *ngIf="errorMessage" class="alert alert-danger text-center w-75 mx-auto mt-3">
+      {{ errorMessage }}
+    </div>
     <div class="text-center mt-3">
       <span>Already have an account?</span>
       <a routerLink="/login" class="ms-1 text-decoration-none">Log in</a>

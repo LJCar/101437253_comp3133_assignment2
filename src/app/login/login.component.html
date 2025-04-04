@@ -35,6 +35,9 @@
 
     <!-- Login or Signup -->
     <button type="submit" class="btn btn-primary w-50 mx-auto d-block">Login</button>
+    <div *ngIf="errorMessage" class="alert alert-danger text-center w-75 mx-auto mt-3">
+      {{ errorMessage }}
+    </div>
     <div class="text-center mt-3">
       <span>Don't have an account?</span>
       <a routerLink="/signup" class="ms-1 text-decoration-none">Sign up</a>
