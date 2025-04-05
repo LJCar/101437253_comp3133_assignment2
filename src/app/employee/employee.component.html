@@ -1,4 +1,50 @@
-<p>employee works!</p>
-<div class="text-end mb-3">
-  <a routerLink="/logout" class="btn btn-outline-danger btn-sm">Logout</a>
+<!-- Logout Button and Add Employee Button-->
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h3 class="m-2">Employee List</h3>
+  <a routerLink="/logout" class="btn btn-outline-danger btn-sm m-3">Logout</a>
 </div>
+
+<!-- Search & Add Employee -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+
+  <div class="d-flex align-items-center gap-2">
+    <label class="form-label m-2">Search:</label>
+    <input
+      type="text"
+      class="form-control form-control-sm"
+      placeholder="Department or Job Title"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="filterEmployees()"
+      style="width: 250px;"
+    />
+    <button class="btn btn-outline-secondary btn-sm" type="button" (click)="clearSearch()">Clear</button>
+  </div>
+
+  <a routerLink="/employees/add" class="btn btn-primary btn-sm me-3">Add Employee</a>
+</div>
+
+<!-- Employee Table -->
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+  <tr>
+    <th>Full Name</th>
+    <th>Email</th>
+    <th>Job Title</th>
+    <th>Department</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody *ngIf="!loading">
+  <tr *ngFor="let emp of filteredEmployees">
+    <td>{{ emp.first_name }} {{ emp.last_name }}</td>
+    <td>{{ emp.email }}</td>
+    <td>{{ emp.job_title }}</td>
+    <td>{{ emp.department }}</td>
+    <td>
+      <button class="btn btn-sm btn-info me-2">View</button>
+      <button class="btn btn-sm btn-warning me-2">Edit</button>
+      <button class="btn btn-sm btn-danger">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
