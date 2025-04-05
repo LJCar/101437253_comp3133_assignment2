@@ -2,8 +2,9 @@ import { Component, OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { GET_EMPLOYEES } from '../graphql/queries';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgForOf, NgIf, TitleCasePipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {DeleteEmployeeComponent} from '../delete-employee/delete-employee.component';
 
 @Component({
   selector: 'app-employee',
@@ -12,7 +13,9 @@ import {FormsModule} from '@angular/forms';
     RouterLink,
     NgForOf,
     NgIf,
-    FormsModule
+    FormsModule,
+    DeleteEmployeeComponent,
+    TitleCasePipe
   ],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.css'
@@ -20,18 +23,22 @@ import {FormsModule} from '@angular/forms';
 export class EmployeeComponent implements OnInit {
   employees: any[] = [];
   filteredEmployees: any[] = [];
-  loading = true;
   searchTerm = '';
+  selectedForDelete: string | null = null;
 
   constructor(private apollo: Apollo) {}
 
   ngOnInit(): void {
+    this.fetchEmployees();
+  }
+
+  fetchEmployees(): void {
     this.apollo.watchQuery({
-      query: GET_EMPLOYEES
+      query: GET_EMPLOYEES,
+      fetchPolicy: 'network-only'
     }).valueChanges.subscribe((result: any) => {
       this.employees = result?.data?.employees;
       this.filteredEmployees = this.employees;
-      this.loading = result.loading;
     });
   }
 
@@ -45,6 +52,12 @@ export class EmployeeComponent implements OnInit {
 
   clearSearch(): void {
     this.searchTerm = '';
+    this.filterEmployees();
+  }
+
+  onDeleted(id: string): void {
+    this.selectedForDelete = null;
+    this.employees = this.employees.filter(emp => emp.id !== id);
     this.filterEmployees();
   }
 }

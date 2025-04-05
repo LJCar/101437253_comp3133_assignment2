@@ -72,6 +72,15 @@ export const resolvers = {
         department,
         employee_photo
       });
+    },
+
+    deleteEmployee: async (_, { id }) => {
+      try {
+        await Employee.findByIdAndDelete(id);
+        return "Employee deleted successfully";
+      } catch (err) {
+        throw new Error(`Error deleting employee: ${err.message}`);
+      }
     }
   }
 };

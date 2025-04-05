@@ -46,5 +46,6 @@ export const typeDefs = gql`
       department: String!
       employee_photo: String
     ): Employee!
+    deleteEmployee(id: ID!): String!
   }
 `;
