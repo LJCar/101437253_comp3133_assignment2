@@ -30,11 +30,16 @@ export const typeDefs = gql`
 
   type Query {
     employees: [Employee!]!
+
+    employee(id: ID!): Employee
   }
 
   type Mutation {
+
     signup(email: String!, firstName: String!, lastName: String!, password: String!): AuthPayload!
+
     login(email: String!, password: String!): AuthPayload!
+
     addEmployee(
       first_name: String!
       last_name: String!
@@ -46,6 +51,20 @@ export const typeDefs = gql`
       department: String!
       employee_photo: String
     ): Employee!
+
     deleteEmployee(id: ID!): String!
+
+    updateEmployee(
+    id: ID!
+    first_name: String!
+    last_name: String!
+    email: String!
+    gender: String!
+    job_title: String!
+    salary: Float!
+    date_of_joining: String!
+    department: String!
+    employee_photo: String
+  ): Employee!
   }
 `;

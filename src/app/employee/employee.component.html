@@ -24,7 +24,7 @@
 </div>
 
 <!-- Employee Table -->
-<table class="table table-bordered table-striped">
+<table class="table table-bordered">
   <thead class="table-dark">
   <tr>
     <th>Full Name</th>
@@ -42,7 +42,7 @@
     <td>{{ emp.department | titlecase }}</td>
     <td>
       <button class="btn btn-sm btn-info me-2">View</button>
-      <button class="btn btn-sm btn-warning me-2">Edit</button>
+      <button class="btn btn-sm btn-warning me-2" [routerLink]="['/employees/update', emp.id]">Edit</button>
       <button class="btn btn-sm btn-danger" (click)="selectedForDelete = emp.id">Delete</button>
       <app-delete-employee
         *ngIf="selectedForDelete === emp.id"

@@ -1,0 +1,130 @@
+<div class="d-flex justify-content-center align-items-start" style="min-height: 100vh; padding-top: 2rem;">
+  <form
+    [formGroup]="updateForm"
+    (ngSubmit)="updateEmployee()"
+    autocomplete="off"
+    class="p-4 w-50 border rounded shadow-sm bg-light"
+  >
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h3 class="m-0">Update Employee</h3>
+      <a routerLink="/employees" class="btn btn-outline-secondary btn-sm">← Back to List</a>
+    </div>
+
+    <!-- First Name -->
+    <div class="mb-3">
+      <label class="form-label">First Name</label>
+      <input
+        formControlName="first_name"
+        class="form-control form-control-sm"
+        [ngClass]="{ 'is-invalid': updateForm.get('first_name')?.touched && updateForm.get('first_name')?.invalid }"
+      />
+      <div class="invalid-feedback">First name is required.</div>
+    </div>
+
+    <!-- Last Name -->
+    <div class="mb-3">
+      <label class="form-label">Last Name</label>
+      <input
+        formControlName="last_name"
+        class="form-control form-control-sm"
+        [ngClass]="{ 'is-invalid': updateForm.get('last_name')?.touched && updateForm.get('last_name')?.invalid }"
+      />
+      <div class="invalid-feedback">Last name is required.</div>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input
+        formControlName="email"
+        type="email"
+        class="form-control form-control-sm"
+        [ngClass]="{ 'is-invalid': updateForm.get('email')?.touched && updateForm.get('email')?.invalid }"
+      />
+      <div class="invalid-feedback">
+        <small *ngIf="updateForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="updateForm.get('email')?.errors?.['email']">Invalid email format.</small>
+      </div>
+    </div>
+
+    <!-- Gender -->
+    <div class="mb-3">
+      <label class="form-label">Gender</label>
+      <select
+        formControlName="gender"
+        class="form-select form-select-sm"
+        [ngClass]="{ 'is-invalid': updateForm.get('gender')?.touched && updateForm.get('gender')?.invalid }"
+      >
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+      <div class="invalid-feedback">Gender is required.</div>
+    </div>
+
+    <!-- Job Title -->
+    <div class="mb-3">
+      <label class="form-label">Job Title</label>
+      <input
+        formControlName="job_title"
+        class="form-control form-control-sm"
+        [ngClass]="{ 'is-invalid': updateForm.get('job_title')?.touched && updateForm.get('job_title')?.invalid }"
+      />
+      <div class="invalid-feedback">Job title is required.</div>
+    </div>
+
+    <!-- Department -->
+    <div class="mb-3">
+      <label class="form-label">Department</label>
+      <input
+        formControlName="department"
+        class="form-control form-control-sm"
+        [ngClass]="{ 'is-invalid': updateForm.get('department')?.touched && updateForm.get('department')?.invalid }"
+      />
+      <div class="invalid-feedback">Department is required.</div>
+    </div>
+
+    <!-- Salary -->
+    <div class="mb-3">
+      <label class="form-label">Salary</label>
+      <input
+        formControlName="salary"
+        type="number"
+        class="form-control form-control-sm"
+        [ngClass]="{ 'is-invalid': updateForm.get('salary')?.touched && updateForm.get('salary')?.invalid }"
+      />
+      <div class="invalid-feedback">Salary must be at least 1000.</div>
+    </div>
+
+    <!-- Date of Joining -->
+    <div class="mb-3">
+      <label class="form-label">Date of Joining</label>
+      <input
+        formControlName="date_of_joining"
+        type="date"
+        class="form-control form-control-sm"
+        [ngClass]="{ 'is-invalid': updateForm.get('date_of_joining')?.touched && updateForm.get('date_of_joining')?.invalid }"
+      />
+      <div class="invalid-feedback">Date of joining is required.</div>
+    </div>
+
+    <!-- Photo -->
+    <div class="mb-3">
+      <label class="form-label">Upload Profile Picture</label>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" class="form-control form-control-sm" />
+    </div>
+
+    <!-- Save Button -->
+    <button type="submit" class="btn btn-primary w-100">Update Employee</button>
+
+    <!-- Success Message and Error Message -->
+    <div *ngIf="successMessage" class="alert alert-success text-center w-75 mx-auto mt-3">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger text-center w-75 mx-auto mt-3">
+      {{ errorMessage }}
+    </div>
+
+  </form>
+</div>
