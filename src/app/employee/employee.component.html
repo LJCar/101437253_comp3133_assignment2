@@ -41,7 +41,7 @@
     <td>{{ emp.job_title | titlecase }}</td>
     <td>{{ emp.department | titlecase }}</td>
     <td>
-      <button class="btn btn-sm btn-info me-2">View</button>
+      <button class="btn btn-sm btn-info me-2" [routerLink]="['/employees/view', emp.id]">View</button>
       <button class="btn btn-sm btn-warning me-2" [routerLink]="['/employees/update', emp.id]">Edit</button>
       <button class="btn btn-sm btn-danger" (click)="selectedForDelete = emp.id">Delete</button>
       <app-delete-employee
